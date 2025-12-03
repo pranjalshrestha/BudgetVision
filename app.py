@@ -173,8 +173,8 @@ button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
 
         st.write("Quarterly Seasonal Factor Summary:")
         sf_display = fq_budget['sf'].copy()
-sf_display.name = "Seasonal Factor"
-st.write(sf_display.describe())
+        sf_display.name = "Seasonal Factor"
+        st.write(sf_display.describe())
 
 
         # Trend plot
