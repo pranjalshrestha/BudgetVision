@@ -115,12 +115,19 @@ if uploaded_file is None:
 
     st.markdown("""
 <style>
+button[data-baseweb="tab"] {
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
 button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
     font-size: 20px;
     font-weight: 700;
+    text-align: center;
 }
 </style>
 """, unsafe_allow_html=True)
+
 
 
     # Create top-level tabs right after preview
