@@ -113,6 +113,15 @@ if uploaded_file is None:
         unsafe_allow_html=True
     )
 
+    st.markdown("""
+<style>
+button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
+    font-size: 20px;
+    font-weight: 700;
+}
+</style>
+""", unsafe_allow_html=True)
+
 
     # Create top-level tabs right after preview
     tabs = st.tabs(["Overview", "Seasonality", "Forecasting", "Variance Analysis", "Anomalies"])
