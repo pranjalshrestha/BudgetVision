@@ -174,7 +174,11 @@ button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
         st.write("Quarterly Seasonal Factor Summary:")
         sf_display = fq_budget['sf'].copy()
         sf_display.name = "Seasonal Factor"
-        st.write(sf_display.describe())
+        sf_desc = sf_display.describe().to_frame()
+        st.dataframe(
+            sf_desc.style.set_properties(**{'text-align': 'right'}),
+            use_container_width=True
+        )
 
 
         # Trend plot
