@@ -172,7 +172,10 @@ button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
         fq_budget['sf'] = fq_budget['Budget'] / fq_budget['budget_ma']
 
         st.write("Quarterly Seasonal Factor Summary:")
-        st.write(fq_budget['sf'].describe())
+        sf_display = fq_budget['sf'].copy()
+sf_display.name = "Seasonal Factor"
+st.write(sf_display.describe())
+
 
         # Trend plot
         fig1, ax1 = plt.subplots(figsize=(14, 6))
