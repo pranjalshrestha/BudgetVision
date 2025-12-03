@@ -40,6 +40,54 @@ if uploaded_file is not None:
         st.error("CSV must contain 'Fiscal Year' and 'Quarter' columns for the quarterly analysis.")
         st.stop()
 
+# --------------------------
+# Fallback to built-in dataset if nothing is uploaded (for QR/mobile users)
+# --------------------------
+if uploaded_file is None:
+    df = pd.read_csv("quarterly_government_budget.csv")
+    st.info("No file uploaded. Using built-in demo dataset.")
+
+    st.subheader("Preview of demo data")
+    st.write(df.head())
+
+    # Build quarter_date for demo dataset
+    if ('Fiscal Year' in df.columns) and ('Quarter' in df.columns):
+        try:
+            df['quarter_date'] = pd.PeriodIndex(
+                year=df['Fiscal Year'].astype(int),
+                quarter=df['Quarter'].astype(str).str.extract(r'(\d)')[0].astype(int),
+                freq='Q'
+            ).to_timestamp()
+        except Exception as e:
+            st.error(f"Failed to build quarter_date from demo dataset: {e}")
+            st.stop()
+    else:
+        st.error("Demo CSV must contain 'Fiscal Year' and 'Quarter' columns.")
+        st.stop()
+# --------------------------
+# Fallback to built-in dataset if nothing is uploaded (for QR/mobile users)
+# --------------------------
+if uploaded_file is None:
+    df = pd.read_csv("quarterly_government_budget.csv")
+    st.info("No file uploaded. Using built-in demo dataset.")
+
+    st.subheader("Preview of demo data")
+    st.write(df.head())
+
+    # Build quarter_date for demo dataset
+    if ('Fiscal Year' in df.columns) and ('Quarter' in df.columns):
+        try:
+            df['quarter_date'] = pd.PeriodIndex(
+                year=df['Fiscal Year'].astype(int),
+                quarter=df['Quarter'].astype(str).str.extract(r'(\d)')[0].astype(int),
+                freq='Q'
+            ).to_timestamp()
+        except Exception as e:
+            st.error(f"Failed to build quarter_date from demo dataset: {e}")
+            st.stop()
+    else:
+        st.error("Demo CSV must contain 'Fiscal Year' and 'Quarter' columns.")
+        st.stop()
 
 
 
