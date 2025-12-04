@@ -439,10 +439,52 @@ button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
                 comp_display[c] = comp_display[c].apply(lambda x: f"{x:,.2f}" if pd.notnull(x) else "N/A")
             for c in ['In-sample MAPE (%)','Pseudo MAPE (%)']:
                 comp_display[c] = comp_display[c].apply(lambda x: f"{x:.2f}%" if pd.notnull(x) else "N/A")
+
             st.markdown("### Model comparison summary")
             st.dataframe(comp_display, use_container_width=True)
+
+            # -------------------------------
+            # 2. Forecast next 4 quarters for all models
+            # -------------------------------
+            # pick an index from the first available forecast series
+            forecast_index = None
+            for name in ['exp_forecast_next4',
+                         'holt_forecast_next4',
+                         'hw_forecast_next4',
+                         'sarima_forecast_next4',
+                         'tsdm_forecast_next4']:
+                if name in locals():
+                    forecast_index = locals()[name].index
+                    break
+
+            if forecast_index is not None:
+                forecast_df = pd.DataFrame({'Quarter': forecast_index})
+
+                if 'exp_forecast_next4' in locals():
+                    forecast_df['ExpSmoothing'] = exp_forecast_next4.values
+                if 'holt_forecast_next4' in locals():
+                    forecast_df['Holt'] = holt_forecast_next4.values
+                if 'hw_forecast_next4' in locals():
+                    forecast_df['Winters'] = hw_forecast_next4.values
+                if 'sarima_forecast_next4' in locals():
+                    forecast_df['SARIMA'] = sarima_forecast_next4.values
+                if 'tsdm_forecast_next4' in locals():
+                    forecast_df['TSDM'] = tsdm_forecast_next4.values
+
+                # nice formatting for display
+                forecast_df_display = forecast_df.copy()
+                forecast_df_display = forecast_df_display.set_index('Quarter')
+                for col in forecast_df_display.columns:
+                    forecast_df_display[col] = forecast_df_display[col].apply(
+                        lambda x: f"{x:,.2f}" if pd.notnull(x) else "N/A"
+                    )
+
+                st.markdown("### Forecasts for next 4 quarters")
+                st.dataframe(forecast_df_display, use_container_width=True)
+
         except Exception:
             pass
+
 
     
 
