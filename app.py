@@ -444,28 +444,7 @@ button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
         except Exception:
             pass
 
-                # -------------------------------
-        # Forecasts for next 4 quarters (all models)
-        # -------------------------------
-        if len(forecast_series) > 0:
-            st.markdown("### Forecasts for Next 4 Quarters (All Models)")
-
-            # Use the index of the first available forecast as the Quarter column
-            first_forecast = next(iter(forecast_series.values()))
-            forecast_df = pd.DataFrame({'Quarter': first_forecast.index})
-
-            for name, s in forecast_series.items():
-                # make sure it's aligned and length 4
-                s = s.iloc[:4]
-                forecast_df[name] = s.values
-
-            st.dataframe(forecast_df, use_container_width=True)
-
-
     
-            
-
-
 
     ####################################
     # Variance Analysis tab
