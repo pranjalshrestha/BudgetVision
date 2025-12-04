@@ -15,7 +15,7 @@ from statsmodels.tsa.seasonal import seasonal_decompose
 from sklearn.metrics import mean_squared_error
 
 st.set_page_config(page_title="BudgetVision", layout="wide")
-st.title("BudgetVision: Automated Budget Variance & Forecasting Tool")
+st.title("BudgetVision: Smart Budget Variance & Forecasting Tool")
 
 # File uploader
 uploaded_file = st.file_uploader("Upload your CSV file", type="csv")
