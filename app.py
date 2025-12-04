@@ -303,7 +303,7 @@ button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
         st.markdown("---")
 
         # ---------- SARIMA (guarded) ----------
-        st.subheader("SARIMA (seasonal ARIMA) — guarded")
+        st.subheader("SARIMA (seasonal ARIMA)")
         try:
             if series.shape[0] >= 12:
                 sarima_model = SARIMAX(series,
