@@ -183,7 +183,7 @@ button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
     ####################################
 
     with tabs[2]:
-        st.markdown("<h2 style='font-size:26px; margin-bottom:6px'>Forecasting</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='font-size:26px; margin-bottom:6px'>Budget Forecasting</h1>", unsafe_allow_html=True)
 
         # ensure series is ready
         fq_budget_series = fq_budget.set_index('quarter_date')['Budget'] if 'quarter_date' in fq_budget.columns else fq_budget
