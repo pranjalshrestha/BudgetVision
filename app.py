@@ -12,10 +12,24 @@ from statsmodels.tsa.holtwinters import ExponentialSmoothing, Holt
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 from statsmodels.tsa.seasonal import seasonal_decompose
 
+from openai import OpenAI
 from sklearn.metrics import mean_squared_error
 
 st.set_page_config(page_title="BudgetVision", layout="wide")
+# OpenAI client
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+
 st.title("AI Financial Intelligence – BudgetVision⁠")
+
+if st.button("Test AI Connection"):
+    try:
+        response = client.responses.create(
+            model="gpt-5.6-luna",
+            input="Respond with exactly: BudgetVision AI connection successful."
+        )
+        st.success(response.output_text)
+    except Exception as e:
+        st.error(f"AI connection failed: {e}")
 
 # File uploader
 uploaded_file = st.file_uploader("Upload your CSV file", type="csv")
