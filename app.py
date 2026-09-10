@@ -174,7 +174,7 @@ button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
         fq_budget['Quarter_Num'] = fq_budget['quarter_date'].dt.quarter
         fig2, ax2 = plt.subplots(figsize=(8, 5))
         box_data = [fq_budget[fq_budget['Quarter_Num']==q]['sf'].dropna() for q in [1,2,3,4]]
-        ax2.boxplot(box_data, labels=['Q1','Q2','Q3','Q4'])
+        ax2.boxplot(box_data, tick_labels=['Q1','Q2','Q3','Q4'])
         ax2.set_title("Seasonal Factors by Quarter")
         ax2.set_xlabel("Quarter")
         ax2.set_ylabel("Seasonal Factor")
