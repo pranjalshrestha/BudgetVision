@@ -29,8 +29,9 @@ if uploaded_file is not None:
     if ('Fiscal Year' in df.columns) and ('Quarter' in df.columns):
         try:
             df['quarter_date'] = pd.PeriodIndex(
-                year=df['Fiscal Year'].astype(int),
-                quarter=df['Quarter'].astype(str).str.extract(r'(\d)')[0].astype(int),
+                df['Fiscal Year'].astype(int).astype(str)
+                + 'Q'
+                + df['Quarter'].astype(str).str.extract(r'(\d)')[0],
                 freq='Q'
             ).to_timestamp()
         except Exception as e:
