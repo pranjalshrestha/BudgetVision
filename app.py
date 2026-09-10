@@ -946,7 +946,7 @@ button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
             from sklearn.ensemble import IsolationForest
             # build feature matrix with value, lag1, rolling mean/std
             feat = pd.DataFrame({'v': s})
-            feat['lag1'] = feat['v'].shift(1).fillna(method='bfill')
+            feat['lag1'] = feat['v'].shift(1).bfill()
             feat['rmean3'] = feat['v'].rolling(3, min_periods=1).mean()
             feat['rstd3'] = feat['v'].rolling(3, min_periods=1).std().fillna(0)
             X = feat.fillna(0).values
